@@ -1,4 +1,5 @@
 local STI = require("sti")
+require("player")
 
 function love.load()
     Map = STI("maps/1.lua", {"box2d"})
@@ -6,10 +7,12 @@ function love.load()
     Map:box2d_init(World)
     Map.layers.solid.visible = false
     background = love.graphics.newImage("assets/background.png")
+    Player:load()
 end
 
 function love.update(dt)
     World:update(dt)
+    Player:update(dt)
 end
 
 
@@ -18,6 +21,9 @@ function love.draw()
     Map:draw(0, 0, 2)
     love.graphics.push()
     love.graphics.scale(2,2)
+
+    Player:draw()
+
     love.graphics.pop()
 end
     
